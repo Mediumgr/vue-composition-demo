@@ -21,6 +21,7 @@
       </div>
 
       <button class="btn primary" type="submit" :disabled="!form.valid">Submit</button>
+
     </form>
 
     <Suspense v-if="submitted">
@@ -29,46 +30,48 @@
         <div class="loader"></div>
       </template>
     </Suspense>
+
   </div>
 
 </template>
 
 <script>
-import {ref, onErrorCaptured} from 'vue'
-import UsersList from './components/UsersList'
-import {useForm} from './use/form'
-
-const required = val => !!val
-const minLength = num => val => val.length >= num
+import { ref, onErrorCaptured } from "vue";
+import UsersList from "./components/UsersList";
+import { useForm } from "./use/form";
 
 export default {
   setup() {
-    const submitted = ref(false)
-    const error = ref()
+    const submitted = ref(false);
+    const error = ref();
+
+    const required = (val) => !!val;
+    const minLength = (num) => (val) => val.length >= num;
+
     const form = useForm({
       email: {
-        value: '',
-        validators: {required}
+        value: "",
+        validators: { required },
       },
       password: {
-        value: '',
-        validators: {required, minLength: minLength(8)}
-      }
-    })
+        value: "",
+        validators: { required, minLength: minLength(8) },
+      },
+    });
 
     function submit() {
-      console.log('Email:', form.email.value)
-      console.log('Password:', form.password.value)
-      submitted.value = true
+      console.log("Email:", form.email.value);
+      console.log("Password:", form.password.value);
+      submitted.value = true;
     }
 
-    onErrorCaptured(e => {
-      error.value = e.message
-    })
+    onErrorCaptured((e) => {
+      error.value = e.message;
+    });
 
-    return {form, submit, submitted, error}
+    return { form, submit, submitted, error };
   },
-  components: {UsersList}
-}
+  components: { UsersList },
+};
 </script>
 

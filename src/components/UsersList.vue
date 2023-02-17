@@ -9,12 +9,12 @@
 </template>
 
 <script>
-import {useUsers} from '../use/users'
+import { useUsers } from "../use/users";
 
 export default {
   async setup() {
-    const {users} = await useUsers()
-    return {users}
-  }
-}
+    const { users } = await useUsers();
+    return { users };
+  },
+};
 </script>
