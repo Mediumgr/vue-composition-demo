@@ -11,7 +11,7 @@ export function useForm(init = {}) {
   }
 
   form[validKey] = computed(() => {
-    Object.keys(form)
+    return Object.keys(form)
       .filter((k) => k !== validKey)
       .every((k) => form[k].valid);
   });
