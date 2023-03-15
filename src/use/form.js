@@ -7,7 +7,6 @@ export function useForm(init = {}) {
 
   for (const [key, value] of Object.entries(init)) {
     form[key] = useField(value);
-    console.log('not_form_ready', form);
   }
 
   form[validKey] = computed(() => {

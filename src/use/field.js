@@ -10,8 +10,6 @@ export function useField(field) {
     valid.value = true;
 
     Object.keys(field.validators ?? {}).map((name) => {
-      console.log('name', name);
-
       const isValid = field.validators[name](val); // пример как это выглядит minLength(8)(val) 
       errors[name] = !isValid;
     
