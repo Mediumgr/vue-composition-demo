@@ -7,7 +7,7 @@ export function useForm(init = {}) {
 
   for (const [key, value] of Object.entries(init)) {
     form[key] = useField(value);
-    console.log(key, form);
+    console.log('not_form_ready', form);
   }
 
   form[validKey] = computed(() => {
@@ -15,6 +15,6 @@ export function useForm(init = {}) {
       .filter((k) => k !== validKey)
       .every((k) => form[k].valid);
   });
-  console.log('form', form);
+  console.log('form_ready', form);
   return form;
 }

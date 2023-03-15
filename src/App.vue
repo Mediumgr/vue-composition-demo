@@ -45,23 +45,25 @@ export default {
     const submitted = ref(false);
     const error = ref();
 
-    const required = (val) => !!val;
-    const minLength = (num) => (val) => val.length >= num;
+    /* const minLength = (num) => (val) => val.length >= num; */
+    function minLength(num) {
+      return function (val) {
+        return val.length >= num;
+      };
+    }
 
     const form = useForm({
       email: {
         value: "",
-        validators: { required },
+        validators: { required: (val) => !!val },
       },
       password: {
         value: "",
-        validators: { required, minLength: minLength(8) },
+        validators: { required: (val) => !!val, minLength: minLength(8) },
       },
     });
 
     function submit() {
-      console.log("Email:", form.email.value);
-      console.log("Password:", form.password.value);
       submitted.value = true;
     }
 
